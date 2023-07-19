@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   is_heredoc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:08 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/13 00:28:10 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:01:15 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
+/*
+"contain_heredoc" adlı fonksiyon, verilen "t_process" tipindeki bir nesnenin 
+"redirects" alanında HEREDOC operatörünün bulunup bulunmadığını kontrol eder. 
+Eğer bulunuyorsa, "TRUE" değerini döndürür; bulunmuyorsa, "FALSE" döndürür.*/
 int	contain_heredoc(t_process *process)
 {
 	int	i;

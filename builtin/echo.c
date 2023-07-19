@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:12 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/13 11:59:04 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 14:14:07 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+Bu fonksiyon girdi olarak aldığı karakter dizisini çıktı olarak yazdırır. İşlevi, 
+her bir karakteri tek tek yazdırarak, girdi olarak verilen diziyi çıktıya yazmaktır.
+*/
 void	put_char(char *input)
 {
 	int	i;
@@ -24,6 +28,11 @@ void	put_char(char *input)
 	}
 }
 
+/*
+`skip_flag` fonksiyonu, bir argüman dizisinin "-n" içerip içermediğini kontrol eder ve 
+"-n" var ise kaç tane "-n" olduğunu sayar. Eğer "-n" var ise, fonksiyon dizinin "-n"'den 
+sonraki elemanına gösterilen indeksi döndürür.
+*/
 int	skip_flag(char **str)
 {
 	int	i;
@@ -39,6 +48,13 @@ int	skip_flag(char **str)
 	return (i);
 }
 
+/*
+Bu fonksiyon `echo` komutunun işlemesini yapar. `input` parametresi `echo` komutu ile birlikte 
+verilen argümanları içerir. Fonksiyon, argümanları yazdırır ve `-n` flag'inin bulunup bulunmadığına 
+göre yazdırılan metnin sonunda bir satır başı karakteri ekler veya eklemez. `is_parent()` 
+fonksiyonunun çıktısına göre çalışma durumu değerlendirilir ve uygun olduğu durumlarda program 
+`exit` fonksiyonu ile sonlanır.
+*/
 void	builtin_echo(char **input)
 {
 	int	i;

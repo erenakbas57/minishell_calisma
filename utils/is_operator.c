@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   is_operator.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:11 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/12 22:14:12 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:05:19 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+"is_operator" fonksiyonu, belirtilen bir dizginin bir işleç 
+olup olmadığını kontrol eder ve işleç türünü (giriş yönlendirmesi, 
+çıkış yönlendirmesi, burada belge veya boru) geri döndürür.
+*/
 int	is_operator(char *str)
 {
 	if (!str)

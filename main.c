@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:23 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/13 15:23:54 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 17:29:41 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 t_minishell	g_ms;
 
+
+/*
+environment ve path leri struct yapısına işliyoruz.
+ana process pid ini işliyoruz.
+errno = 0 neden veriyoruz bilmiyorum
+*/
 void	init_app(char **env)
 {
 	errno = 0;

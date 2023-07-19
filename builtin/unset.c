@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:22 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/13 02:37:42 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 14:18:36 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+`remove_env` fonksiyonu, belirtilen bir değişkenin ortam değişkeni dizisinden 
+kaldırılmasını sağlar. Fonksiyon, belirtilen değişkenin ismini alır ve ortam değişkeni 
+dizisinde bulunan tüm girişleri kontrol eder. Eğer bulunan giriş belirtilen 
+değişkene eşitse, o giriş ortam değişkeni dizisinden silinir ve kalan girişler 
+yeni bir ortam değişkeni dizisi oluşturulur.
+*/
 void	remove_env(char *data)
 {
 	int		i;
@@ -35,6 +42,12 @@ void	remove_env(char *data)
 	g_ms.env = new_env;
 }
 
+/*
+Bu C dilinde bir fonksiyondur ve "unset" komutunun işlevini yerine getirir. Bu fonksiyon, 
+girdi olarak verilen değişkenleri ortam değişkenlerinden kaldırır ve set_paths() fonksiyonunu 
+çağırarak yolun güncellenmesini sağlar. Eğer fonksiyon çalışan bir ebeveyn işlem değilse, 
+başarıyla çıkış yapar (EXIT_SUCCESS).
+*/
 void	builtin_unset(char **input)
 {
 	char	*data;

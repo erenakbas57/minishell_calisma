@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:06 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/13 14:18:16 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:04:52 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+Bu fonksiyon `check_dir`, verilen `cmd` argümanının bir dizin 
+olup olmadığını kontrol eder. Eğer bir dizin ise, `directory_err` 
+fonksiyonu çağırılır.
+*/
 void	check_dir(char *cmd)
 {
 	DIR	*dir;
@@ -26,12 +31,27 @@ void	check_dir(char *cmd)
 	}
 }
 
+/*
+Bu fonksiyon, iki string verilen "mim" ve "path" parametrelerini 
+birleştirir ve "mim" parametresinin bellekte ayrılmış alanını 
+serbest bırakır. Sonuç olarak, "path" parametresi döndürülür.
+*/
 char	*mimi_ret_free(char *mim, char *path)
 {
 	free(mim);
 	return (path);
 }
 
+/*
+Bu fonksiyon "cmd" adındaki bir komutun yolunu almaya çalışır. 
+İlk olarak "cmd" yolunun geçerli olup olmadığını kontrol eder. 
+Eğer geçerli ise, "cmd" yolunun kopyasını döndürür. Eğer "cmd" yolu 
+geçerli değilse, g_ms.paths değişkenindeki yolları kullanarak komutun 
+yolunu bulmaya çalışır. Eğer yol bulunamazsa, "cmd" içinde "/" karakteri 
+varsa, no_file_err fonksiyonunu çağırarak "cmd" adındaki dosya veya dizin 
+bulunamadı hatası verir. Eğer g_ms.paths değişkeni de tanımlı değilse, 
+command_err fonksiyonunu çağırarak komut bulunamadı hatası verir.
+*/
 char	*get_path(char *cmd)
 {
 	char	*path;

@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   cleaner.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:51:54 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/13 11:06:45 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:58:17 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+belirtilen bir dizgiyi (str) bir diğer dizgine (new_str) ekleme işlevini 
+yerine getirir. İlk olarak, new_str boşsa, str'nin kopyası olarak ayarlanır. 
+Eğer new_str daha önce tanımlanmışsa, str new_str ile birleştirilir ve sonuç 
+yeniden new_str'nin değerine atanır. Böylece, belirtilen dizgi, bir kez daha 
+kullanılabilir olarak korunur.
+*/
 void	push_new_str(char **new_str, char *str)
 {
 	char	*tmp;
@@ -28,6 +35,14 @@ void	push_new_str(char **new_str, char *str)
 	free(str);
 }
 
+/*
+Bu fonksiyon, belirtilen karakter (type) ile çevrili olan metin dizisindeki 
+metin parçalarını temizler ve temizlenen parçaları yeni bir metin dizisi olarak 
+döndürür. Fonksiyonun girdisi olarak verilen "str" değişkenindeki metin içinde, 
+belirtilen tip karakteri ile çevrili olan metin parçaları bulunur ve bu parçalar 
+"new_str" adında yeni bir metin dizisi olarak oluşturulur. Aynı zamanda, işlenen 
+metnin pozisyonu "pos" değişkeni ile güncellenir.
+*/
 char	*clean_quote_with_type(char *str, int *pos, char type)
 {
 	int		first;
@@ -43,6 +58,11 @@ char	*clean_quote_with_type(char *str, int *pos, char type)
 	return (new_str);
 }
 
+/*
+"get_str" isimli fonksiyon, belirtilen pozisyondan başlayarak metindeki en fazla 
+tek tırnaklı veya çift tırnaklı metin bloğunu bulmaya çalışır. Bulduğu bu metin 
+bloğunu döndürür ve "pos" parametresi ile verilen pozisyon değişkenini de günceller.
+*/
 static char	*get_str(char *str, int	*pos)
 {
 	int	first;
@@ -53,6 +73,12 @@ static char	*get_str(char *str, int	*pos)
 	return (ft_substr(str, first, *pos - first));
 }
 
+/*
+Bu fonksiyon, verilen bir dize içindeki çift veya tek tırnak karakterlerini temizlemek 
+için kullanılır. Fonksiyon, metin içindeki tırnak karakterlerini algılar ve tırnakların 
+içindeki metnin dışındaki herhangi bir şeyi temizler. Sonuç olarak, fonksiyon, tırnak 
+karakterleri içindeki metin dışındaki her şeyin atılmasıyla oluşan temiz bir metin dizesi oluşturur.
+*/
 char	*clean_quote(char *str)
 {
 	int		i;

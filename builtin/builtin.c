@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:22:36 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/13 11:36:51 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 14:12:28 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+Bu fonksiyon "command" değişkeninde verilen komutun, shell tarafından yerleşik 
+olarak desteklenen bir komut olup olmadığını kontrol eder. Her bir yerleşik 
+komut için bir dönen değer vardır. Örneğin, "cd" komutu için CD değeri, "exit" 
+komutu için EXIT değeri vb. Eğer verilen komut yerleşik bir komut değilse, 
+fonksiyon 0 döner.
+*/
 int	is_builtin(char *command)
 {
 	if (ft_strcmp(command, "cd"))
@@ -31,6 +38,11 @@ int	is_builtin(char *command)
 	return (0);
 }
 
+/*
+Bu fonksiyon, çalıştırılmak istenen komutun bir iç yapı komutu olup olmadığını belirler 
+ve eğer iç yapı komutu ise, o komutun çalışmasını sağlar. Örneğin, çalıştırılmak istenen 
+komut "cd" ise, "builtin_cd" fonksiyonu çağrılır ve klasör değiştirme işlemi yapılır.
+*/
 void	run_builtin(char **execute)
 {
 	int	type;

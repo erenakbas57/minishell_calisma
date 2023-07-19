@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 00:24:38 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/13 15:24:00 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 17:45:23 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ enum e_builtin_types
 
 enum e_ttype
 {
-	PIPE = 1,
-	STRING,
-	HERE_DOC,
-	RED_INPUT,
-	RED_APPEND,
-	RED_OUTPUT
+	PIPE = 1,   // |
+	STRING,     // char *
+	HERE_DOC,	// <<
+	RED_INPUT,	// <
+	RED_APPEND,	// >>
+	RED_OUTPUT	// >
 };
 
 typedef struct s_token
@@ -67,24 +67,24 @@ typedef struct s_token
 
 typedef struct s_process
 {
-	pid_t				pid;
-	int					fd[2];
-	int					heredoc_fd[2];
-	char				**execute;
-	char				**redirects;
-	struct s_process	*prev;
-	struct s_process	*next;
+	pid_t				pid;			// process id si
+	int					fd[2];			// input ve output dosyası
+	int					heredoc_fd[2];	
+	char				**execute;		// execute kısmı
+	char				**redirects;	// > & >> işaretlerini tutuyor
+	struct s_process	*prev;			// önceki process
+	struct s_process	*next;			// sonraki **
 }	t_process;
 
 typedef struct s_minishell
 {
-	int			parent_pid;
-	int			process_count;
-	int			ignore;
-	char		**env;
-	char		**paths;
-	t_token		*token;
-	t_process	*process;
+	int			parent_pid;		// main process id
+	int			process_count;	// process sayısı
+	int			ignore;			//
+	char		**env;			// environment dizisini satır satır tutuyor
+	char		**paths;		// env içindeki path kısmını : ile ayrılmış dizi şeklinde tutar
+	t_token		*token;			// inputu boşluğa göre parçalayıp 
+	t_process	*process;		// processler
 }				t_minishell;
 
 extern t_minishell	g_ms;

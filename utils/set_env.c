@@ -3,15 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   set_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:18 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/13 01:03:20 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:06:56 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+"set_env" fonksiyonu, bir ortam değişkeni dizisi 
+olan "env" verilen bir programın ortam değişkenlerini 
+"g_ms.env" isimli global bir değişkene atar. Bu değişken, 
+programın çalışma sırasında kullanılabilecek ortam 
+değişkenlerinin tutulmasını sağlar.
+*/
 void	set_env(char **env)
 {
 	size_t	i;

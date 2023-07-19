@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   set_paths.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:21 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/13 02:40:24 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:07:13 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+"set_paths" fonksiyonu PATH ortam değişkeninin değerini alır 
+ve bu değerin parçalarını ": " karakteri kullanarak dizi olarak 
+ayırır. Elde edilen dizi "g_ms.paths" değişkenine atanır. 
+Eğer PATH değişkeni boş ise "g_ms.paths" değişkeni NULL olarak atanır.
+*/
 void	set_paths(void)
 {
 	char	*path;

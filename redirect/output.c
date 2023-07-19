@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   output.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:11:39 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/13 11:09:09 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:15:49 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+"input" ve "output" fonksiyonları, belirtilen dosya isimli dosyalardan veya bu dosyalara 
+veri okumak/yazmak için kullanılan dosya tanımlayıcılarını yönetmek için kullanılır. Bu fonksiyonlar, 
+verilerin standart giriş veya standart çıkış akışından okunması veya yazılması yerine belirtilen 
+dosyalardan okunması veya belirtilen dosyalara yazılmasını sağlar.
+*/
 void	output(char *file, int mode)
 {
 	int		fd;

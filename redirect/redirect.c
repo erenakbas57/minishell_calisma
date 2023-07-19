@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:11:59 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/13 13:53:21 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:16:50 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+Bu fonksiyon, belirtilen işlemde yönlendirilmiş girdi kaynaklarını almak için kullanılır. 
+İşlemdeki tüm yönlendirme işaretçleri taranır ve eğer RED_INPUT veya HERE_DOC gibi yönlendirme 
+operatörleri bulunursa, ilgili fonksiyonlar çağrılır ve girdi kaynağı belirlenir.
+*/
 void	get_all_inputs(t_process *process)
 {
 	int		i;
@@ -29,6 +34,12 @@ void	get_all_inputs(t_process *process)
 	}
 }
 
+/*
+`get_all_inputs` ve `set_all_outputs` fonksiyonları, `process` verilerini yönlendirme işlemlerini 
+yapmak için kullanılan fonksiyonlardır. `get_all_inputs` fonksiyonu verilen `process` verilerine 
+göre girdi dosyalarını okumak için gerekli olan fonksiyonları çağırır. `set_all_outputs` fonksiyonu 
+verilen `process` verilerine göre çıktı dosyalarını yazmak için gerekli olan fonksiyonları çağırır.
+*/
 void	set_all_outputs(t_process *process)
 {
 	int		i;
@@ -46,6 +57,13 @@ void	set_all_outputs(t_process *process)
 	}
 }
 
+/*
+Bu fonksiyon, bir shell uygulamasında "here document" (heredoc) yönlendirmesini desteklemek için tasarlandı. 
+Her process için, process'in "redirects" dizisindeki her bir "here document" yönlendirmesini işler ve o yönlendirmenin 
+bitiş satırına kadar okunan kullanıcı girdilerini bir pipe üzerinden saklar. "heredoc_fd" dizisi, pipe'ın okuma ve yazma 
+uçlarını tutar. "heredoc()" fonksiyonu, kullanıcı girdilerini okur ve yazdığı pipe üzerinde saklar. "fill_all_heredoc()" 
+fonksiyonu ise tüm processler için "heredoc()" fonksiyonunu çağırır ve tüm "here document" yönlendirmelerinin doldurulmasını sağlar.
+*/
 void	fill_all_heredoc(void)
 {
 	int			i;

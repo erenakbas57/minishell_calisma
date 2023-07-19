@@ -3,15 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   run_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 19:15:09 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/13 15:27:32 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 14:11:39 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+bir pipe (boru) mekanizması için gerekli dosya tanımlayıcılarını (file descriptors) 
+yapılandırır. Aşağıdaki adımları gerçekleştirir:
+
+1.  Eğer işlem bir listenin başındaysa, verilerin yazılacağı dosya tanımlayıcısı 
+process->fd[1] olarak yapılandırılır.
+2.  Eğer işlem bir listenin sonundaysa, verilerin okunacağı dosya tanımlayıcısı 
+process->prev->fd[0] olarak yapılandırılır.
+3.  Eğer işlem listenin başında veya sonunda değilse, verilerin okunacağı dosya
+tanımlayıcısı process->prev->fd[0], verilerin yazılacağı dosya tanımlayıcısı 
+ise process->fd[1] olarak yapılandırılır.
+
+Bu fonksiyon, pipe mekanizmasının farklı bölümlerinde verilerin nasıl yazılacağı
+ ve okunacağı hakkında bilgi sağlar.
+*/
 void	pipe_route(t_process *process)
 {
 	if (process->prev == NULL)
@@ -25,6 +40,14 @@ void	pipe_route(t_process *process)
 	}
 }
 
+/*
+1.  Verilerin okunacağı dosya tanımlayıcısı process->heredoc_fd[0] olarak yapılandırılır.
+2.  Eğer işlem bir listenin sonundaysa, verilerin yazılacağı dosya tanımlayıcısı 
+process->fd[1] olarak yapılandırılır.
+
+Bu fonksiyon, "heredoc" mekanizmasının nasıl çalışacağı hakkında bilgi sağlar ve işlemin 
+verilerin nasıl okunacağı ve yazılacağı hakkında bilgi verir.
+*/
 void	heredoc_route(t_process *process)
 {
 	dup2(process->heredoc_fd[0], 0);
@@ -32,6 +55,19 @@ void	heredoc_route(t_process *process)
 		dup2(process->fd[1], 1);
 }
 
+/*
+1.  Eğer işlem tek bir işlem değilse ve içerisinde "heredoc" mekanizması bulunuyorsa, 
+heredoc_route fonksiyonu çağrılır ve işlemin verilerin okunması ve yazılması için 
+gerekli dosya tanımlayıcıları yapılandırılır.
+2.  Eğer "heredoc" mekanizması bulunmuyorsa, pipe_route fonksiyonu çağrılır ve işlemin 
+verilerin okunması ve yazılması için gerekli dosya tanımlayıcıları yapılandırılır.
+3.  get_all_inputs ve set_all_outputs fonksiyonları çağrılır ve işlemin girdileri ve 
+çıktıları yapılandırılır.
+4.  Tüm dosya tanımlayıcıları kapatılır.
+
+Bu fonksiyon, işlemin nasıl yapılandırılacağını belirler ve işlemin girdilerinin ve 
+çıktılarının nasıl yapılandırılacağı hakkında bilgi verir.
+*/
 void	cmd_route(t_process *process)
 {
 	if (g_ms.process_count > 1)
@@ -46,6 +82,14 @@ void	cmd_route(t_process *process)
 	close_all_fd();
 }
 
+/*
+"run_cmd" fonksiyonu, belirtilen süreç için bir çocuk süreci oluşturur ve çocuk sürecinde 
+belirtilen komutun yürütülmesini sağlar. İşlem yapılacak komut, belirtilen girdi ve çıktılar 
+aracılığıyla yapılır ve çocuk süreci beklenir. Eğer komut bir "built-in" komut ise çocuk 
+süreci tarafından direk çalıştırılır, değilse PATH değişkeni aracılığıyla komutun yolu 
+bulunur ve execve fonksiyonu ile çalıştırılır. Eğer komut bulunamaz veya başka bir hata 
+oluşursa, hata mesajı görüntülenir ve çocuk süreci sonlandırılır.
+*/
 void	run_cmd(t_process *process)
 {
 	pid_t	pid;

@@ -3,15 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 13:23:09 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/13 11:07:18 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 14:13:00 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+Bu fonksiyon, minishell adlı bir programda CD (Change Directory) komutunun işlemini 
+yapar. İlk olarak, eğer input[1] boş değilse, input[1] deki dizin adına geçmeyi 
+deniyor. Eğer başarısız olursa, perror fonksiyonuyla hatayı ekrana yazdırıyor. 
+Eğer input[1] boş ise, HOME değişkeni içindeki ev dizinine geçmeyi deniyor. Eğer 
+ev dizini bulunamazsa, perror fonksiyonuyla hatayı ekrana yazdırıyor. Son olarak, 
+eğer programın çalıştığı dizin ana dizin değilse (is_parent() fonksiyonu ile 
+kontrol ediliyor), program exit(errno) fonksiyonuyla sonlandırılıyor.
+*/
 void	builtin_cd(char **input)
 {
 	char	*home;

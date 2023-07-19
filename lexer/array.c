@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   array.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 21:51:40 by btekinli          #+#    #+#             */
-/*   Updated: 2022/10/12 21:51:45 by btekinli         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:19:39 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+/*
+Bu fonksiyon, verilen bir dizi ("arg_arr") ve bir metin dizesi ("str") alır 
+ve bu metin dizesini dizinin sonuna ekleyerek yeni bir dizi oluşturur. Eski 
+dizi önce serbest bırakılır ve yeni dizi döndürür.
+*/
 char	**push_array(char **arg_arr, char *str)
 {
 	int		i;
