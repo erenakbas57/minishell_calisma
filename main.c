@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
+/*   By: btekinli <btekinli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/12 22:14:23 by fkaratay          #+#    #+#             */
-/*   Updated: 2023/07/18 19:48:56 by makbas           ###   ########.fr       */
+/*   Created: 2022/10/12 22:14:23 by btekinli          #+#    #+#             */
+/*   Updated: 2022/10/13 15:23:54 by btekinli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,45 +21,6 @@ void	init_app(char **env)
 	g_ms.parent_pid = getpid();
 	set_env(env);
 	set_paths();
-}
-
-void	set_env(char **env)
-{
-	size_t	i;
-	size_t	len;
-	char	**head;
-
-	head = env; // env'i head (char **) dizisine attık
-	while (*head) 
-		head++;
-	// "head" işaretçisini "env" dizisinde son elemandan bir sonraki hücreye taşır. 
-	// Bu, "env" dizisinin sonunu belirlemek için kullanılır.
-	
-	len = head - env; // len'e env'deki çevre değişkeni sayısını atar.
-
-	// len + 1 boyutunda bir char ** (iki boyutlu char dizisi) 
-	//için bellek tahsis edin ve g_ms.env'ye atayın
-	g_ms.env = ft_calloc(sizeof(char **), len + 1);
-	
-	i = -1;
-	while (++i < len)
-		g_ms.env[i] = ft_strdup(env[i]);
-	// Bu döngüde, "env" dizisini dolaşarak her çevre değişkeni için 
-	// bellek tahsis edilir ve değerleri kopyalanır. 
-}
-
-void	set_paths(void)
-{
-	char	*path;
-
-	if (g_ms.paths)
-		free_array(g_ms.paths);
-	path = get_env("PATH");
-	if (!(*path))
-		g_ms.paths = NULL;
-	else
-		g_ms.paths = ft_split(path, ':');
-	free(path);
 }
 
 void	init_shell(char *input)
@@ -82,7 +43,8 @@ void	ctrl_c(int sig)
 	write(1, "\033[A", 3);
 }
 
-void	ctrl_d(char *input){
+void	ctrl_d(char *input)
+{
 	if (!input)
 	{
 		printf("exit\n");
@@ -94,8 +56,7 @@ int	main(int ac, char **av, char **env)
 {
 	char	*input;
 
-	init_app(env); //(çevre değişkenlerini struct yapımıza almak için)
-	
+	init_app(env);
 	while (ac && av)
 	{
 		g_ms.ignore = FALSE;
