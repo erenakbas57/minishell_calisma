@@ -6,7 +6,7 @@
 /*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:14:23 by btekinli          #+#    #+#             */
-/*   Updated: 2023/07/19 17:29:41 by makbas           ###   ########.fr       */
+/*   Updated: 2023/07/20 18:16:34 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	init_shell(char *input)
 	g_ms.process_count = 0;
 	tokenize(input);
 	if (!lexer())
-		return ;
-	start_cmd();
-	free_process();
+	 	return ;
+	// start_cmd();
+	// free_process();
 }
 
 void	ctrl_c(int sig)

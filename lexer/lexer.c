@@ -6,7 +6,7 @@
 /*   By: makbas <makbas@student.42istanbul.com.t    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 22:08:25 by btekinli          #+#    #+#             */
-/*   Updated: 2023/07/19 13:25:01 by makbas           ###   ########.fr       */
+/*   Updated: 2023/07/20 19:48:57 by makbas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,18 @@ int	lexer(void)
 	token = g_ms.token;
 	while (token)
 	{
-		if (token->type == PIPE || token->prev == NULL)
+		if (token->type == PIPE || token->prev == NULL) // pipe geldiğinde ya da ilk tokende girer
 		{
-			if (token->type == PIPE)
+			if (token->type == PIPE) // pipe ise diğer tokene geçer
 				token = token->next;
 			process = init_process();
 			process_addback(&g_ms.process, process);
 			g_ms.process_count++;
+			// burada sadece process struct'ı için işlem yapıyoruz
 		}
 		if (!token)
 			break ;
-		if (!append_arguments(&token, process))
+		if (!append_arguments(&token, process)) // tokenler burada process kısımlarına ekleniyor
 			return (FALSE);
 		if (token)
 			token = token->next;
